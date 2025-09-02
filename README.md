@@ -1,9 +1,9 @@
 # 🚀 LLM Engineer Roadmap (10-Day Learning Challenge)
 
 這是一個 10 天完成的高強度學習計劃，目標是掌握 **LLM 工程師完整技能樹**，並最終完成一個 **安全的文件問答系統 (Secure RAG System)**。
-
-<img src="VbXDaC08KQN399RtqIRea.png" alt="專案示意圖" width="400">
-
+<p align="center">
+  <img src="VbXDaC08KQN399RtqIRea.png" alt="專案示意圖" width="400">
+</p>
 ## 🧑‍💻 專案目標
 - 學習並實作 **圖片中的所有技能**（Running LLMs → Vector Storage → RAG → Inference Optimization → Deployment → Security）。
 - 每天完成一個 milestone，並 push 到 GitHub。
