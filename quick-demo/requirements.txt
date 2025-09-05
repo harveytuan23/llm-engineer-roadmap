@@ -1,0 +1,6 @@
+faiss-cpu
+sentence-transformers
+pypdf
+groq
+langchain-text-splitters
+streamlit   # 可選，若要做 UI
