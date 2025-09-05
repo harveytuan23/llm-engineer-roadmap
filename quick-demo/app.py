@@ -54,18 +54,25 @@ import streamlit as st
 embedder = SentenceTransformer("sentence-transformers/all-MiniLM-L6-v2")
 client = Groq(api_key=os.getenv("GROQ_API_KEY"))
 
-# 2. 讀 PDF 並切 chunk
-pdf = PdfReader("data/sample.pdf")
-raw = "\n".join([p.extract_text() for p in pdf.pages if p.extract_text()])
-splitter = RecursiveCharacterTextSplitter(chunk_size=800, chunk_overlap=100)
-chunks = splitter.split_text(raw)
+uploaded_file = st.file_uploader("Upload a PDF", type="pdf")
+if uploaded_file:
+    pdf = PdfReader(uploaded_file)
+    raw = "\n".join([p.extract_text() for p in pdf.pages if p.extract_text()])
+    splitter = RecursiveCharacterTextSplitter(chunk_size=800, chunk_overlap=100)
+    chunks = splitter.split_text(raw)
 
-# 3. 建立向量索引
-emb = embedder.encode(chunks, normalize_embeddings=True)
-emb = np.array(emb, dtype="float32")
-dim = emb.shape[1]
-index = faiss.IndexFlatIP(dim)
-index.add(emb)
+    # 建立向量索引
+    emb = embedder.encode(chunks, normalize_embeddings=True)
+    emb = np.array(emb, dtype="float32")
+    dim = emb.shape[1]
+    index = faiss.IndexFlatIP(dim)
+    index.add(emb)
+
+    st.success("PDF processed! You can now ask questions.")
+else:
+    st.warning("Please upload a PDF to start.")
+    st.stop()
+
 
 # -------- Memory 類別 --------
 class Memory:
